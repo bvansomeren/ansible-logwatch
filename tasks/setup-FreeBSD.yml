@@ -1,0 +1,9 @@
+---
+- name: Install Logwatch using PKG
+  pkgng: name=logwatch state=present
+
+- stat: path={{ logwatch_config_folder }}/logwatch.conf
+  register: customconf
+- name: create empty logwatch.conf for customization.
+  file: path={{ logwatch_config_folder}}/logwatch.conf state=touch
+  when: customconf.stat.exists is defined and not customconf.stat.exists

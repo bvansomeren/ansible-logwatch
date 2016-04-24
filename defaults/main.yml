@@ -1,0 +1,4 @@
+---
+# defaults file for bvansomeren.logwatch
+logwatch_confirm_mail: True
+logwatch_overrides: []

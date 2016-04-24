@@ -1,0 +1,23 @@
+---
+# tasks file for bvansomeren.logwatch
+#
+
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: setup-FreeBSD.yml
+  when: ansible_os_family == 'FreeBSD'
+
+- name: make config changes under the logwatch.conf used for overrides (either in etc or usr depending on OS)
+  lineinfile: dest="{{ logwatch_config_folder}}/logwatch.conf" regexp="^{{ item.name }} =" line='{{ item.name }} = {{ item.config }}'
+  with_items: logwatch_overrides
+
+- name: Testing logwatch check your email
+  command: "{{ logwatch_executable }}"
+  when: logwatch_confirm_mail

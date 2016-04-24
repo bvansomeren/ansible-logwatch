@@ -1,0 +1,4 @@
+---
+logwatch_config_folder: "/usr/local/etc/logwatch"
+logwatch_default_folder: "{{ logwatch_config_folder }}/defaults"
+logwatch_executable: "/usr/local/sbin/logwatch.pl"

@@ -1,0 +1,4 @@
+---
+logwatch_config_folder: "/etc/logwatch/conf"
+logwatch_default_folder: "/usr/share/logwatch/default.conf"
+logwatch_executable: "/usr/sbin/logwatch"
