@@ -17,6 +17,7 @@ You can override the default configuration, see example below:
 
 These contain a map / dict of the configuration changes you want in the override config (location depends on OS).
 Example:
+
 	logwatch_overrides:
 	- { name: MailTo, config: me@example.com }
 	- { name: Print, config: "no" }
