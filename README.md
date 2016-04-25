@@ -1,38 +1,47 @@
-Role Name
+bvansomeren.logwatch
 =========
 
-A brief description of the role goes here.
+Installs `Logwatch` and applies changes to the configuration (for example to send emails)
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+You can override the default configuration, see example below:
+
+	logwatch_overrides: []
+
+These contain a map / dict of the configuration changes you want in the override config (location depends on OS).
+Example:
+	logwatch_overrides:
+	- { name: MailTo, config: me@example.com }
+	- { name: Print, config: "no" }
+	- { name: Output, config: mail }
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: all
+      become: yes
+      become_user: root
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: bvansomeren.logwatch, logwatch_overrides: [{ name: MailTo, config: mail@example.com }, { name: Print, config: "no"}, { name: Output, config: mail} ] }
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
