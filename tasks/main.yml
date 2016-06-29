@@ -16,7 +16,7 @@
 
 - name: make config changes under the logwatch.conf used for overrides (either in etc or usr depending on OS)
   lineinfile: dest="{{ logwatch_config_folder}}/logwatch.conf" regexp="^{{ item.name }} =" line='{{ item.name }} = {{ item.config }}'
-  with_items: logwatch_overrides
+  with_items: "{{ logwatch_overrides }}"
 
 - name: Testing logwatch check your email
   command: "{{ logwatch_executable }}"
